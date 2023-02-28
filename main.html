@@ -30,18 +30,26 @@
   const itemsList = document.querySelector('.plates');
 	const inputText = document.querySelector('input');
   const items = [];
+	let index=0;
 	function itemsAdded(event){
 		event.preventDefault()
-		itemsList.innerText=""
+		//itemsList.innerText=""
 		items.push(inputText.value)
-		items.forEach(function(value,index){
-			itemsList.innerHTML+=`<li><input type="checkbox" data-index=${index} id="item${index}" ${itemsList.done ? 'checked' : ''} /><label for="item${index}">${value}</label></li>`
-			localStorage.setItem('item',itemsList)
-		})
-		
-		let convertor=JSON.stringify(itemsList)
-		console.log(localStorage.getItem('item'))
+		//items.forEach(function(value,index){
+			let data=`<li><input type="checkbox" data-index=${index} id="item${index}" ${inputText.value.done ? 'checked' : ''} /><label for="item${index}">${inputText.value}</label></li>`
+			itemsList.innerHTML+=data
+			localStorage.setItem(`item${index}`,data)
+			let convertor=JSON.stringify(itemsList)
+			console.log(localStorage.getItem(`item${index}`))
+			index++
+		//})	
 	}
+	function checkedOrNot(e) {
+		e.target.setAttribute("checked",inputText.value.done ? 'checked' : '')
+	}
+	itemsList.addEventListener('click',checkedOrNot)
+	
+
 
 </script>
 
