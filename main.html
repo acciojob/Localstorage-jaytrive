@@ -32,9 +32,15 @@
   const items = [];
 	function itemsAdded(event){
 		event.preventDefault()
-		items.push(inputText.value)
 		itemsList.innerText=""
+		items.push(inputText.value)
+		items.forEach(function(value,index){
+			itemsList.innerHTML+=`<li><input type="checkbox" data-index=${index} id="item${index}" ${itemsList.done ? 'checked' : ''} /><label for="item${index}">${value}</label></li>`
+			localStorage.setItem('item',itemsList)
+		})
 		
+		let convertor=JSON.stringify(itemsList)
+		console.log(localStorage.getItem('item'))
 	}
 
 </script>
